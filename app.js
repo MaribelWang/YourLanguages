@@ -15,9 +15,6 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.get('/',(req,res) => {
-    res.render('index');
-});
 
 app.listen(app.get('port'),() => {
     console.log(`server on port ${app.get('port')}`);
