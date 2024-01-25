@@ -1,3 +1,5 @@
+const express = require('express');
+const router = express;
 module.exports = (app) =>{
     
     let tutors = [];
@@ -10,16 +12,17 @@ module.exports = (app) =>{
         res.render('teacher-form', {title: "New teacher page"});
     });
 
-    app.post('/teacher-form',(req,res) => {
-        if(!req.body.name || req.body.description){
+    app.post('/teacher-form/create',(req,res) => {
+        if(!req.body.name || !req.body.description){
             res.send(400).send('The name and description should not be blank');
         }
         let newTutor = {
             name: req.body.name,
             description: req.body.description,
-            location:new Location()
+            date:new Date()
         };
         tutors.push(newTutor);
         res.redirect('/');
+        console.log(tutors);
     });
 }

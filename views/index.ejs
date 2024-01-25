@@ -5,7 +5,18 @@
     <%- include('partials/navbar.ejs') %>
 
     <% if(tutors.length){ %>
-        <h1>find teachers</h1>
-    <% } %>
+        <% tutors.forEach(function(tutor) { %>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <%= tutor.name %>
+                    <div class="pull-right">
+                        <%= tutor.date %>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <%= tutor.description %>
+                </div>
+            </div>
+        <% }); } %>   
 </body>
 </html>

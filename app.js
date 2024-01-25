@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-app.use('/',require(path.join(__dirname, 'routers/router')));
+require('./routers/router')(app);
 //? router/router
 
 app.listen(app.get('port'),() => {
