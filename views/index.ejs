@@ -6,17 +6,20 @@
 
     <% if(tutors.length){ %>
         <% tutors.forEach(function(tutor) { %>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
+            <div class="card  ">
+                <div class="d-flex justify-content-between bg-primary text-white">
+                <div class="card-header p-2">
                     <%= tutor.name %>
-                    <div class="pull-right">
-                        <%= tutor.date %>
-                    </div>
                 </div>
-                <div class="panel-body">
+                <div class=" pull-right p-2">
+                        <%= tutor.date %>
+                </div>
+            </div>
+                <div class="card-body text-black">
                     <%= tutor.description %>
                 </div>
             </div>
-        <% }); } %>   
+        <% }); %>
+    <% } %>   
 </body>
 </html>

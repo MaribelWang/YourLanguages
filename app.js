@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 require('./routers/router')(app);
-//? router/router
 
 app.listen(app.get('port'),() => {
     console.log(`server on port ${app.get('port')}`);
