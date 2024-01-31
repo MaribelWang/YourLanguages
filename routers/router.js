@@ -10,32 +10,46 @@ function readData(){
 }
 
 module.exports = (app) =>{
-    const tutorsData = readData().tutors || [];
+    
 
     app.get('/',(req, res) => {
+        const tutorsData = readData().tutors || [];
         res.render('index',{
         title:"Your Languages", 
         tutors:tutorsData
-    }
-        );
+       });
     });
     app.get('/teacher-form',(req,res) => {
         res.render('teacher-form', {title: "New teacher page"});
     });
 
     app.post('/teacher-form/create',(req,res) => {
+        const data = readData();
         if(!req.body.name || !req.body.description){
             res.send(400).send('The name and description should not be blank');
         }
         let newTutor = {
+            id:generateUniqueId(),
             name: req.body.name,
-            description: req.body.description,
-            id:new Date()
+            description: req.body.description
         };
-        res.redirect('/')
-        tutors.push(newTutor);;
-        console.log(tutors);
+        if(data != null){
+            data.tutors.push(newTutor);
+            writeData(data);
+            res.redirect('/');
+        }   
     });
+}
+
+function writeData(data){
+    const updataJsonData = JSON.stringify(data, null, 2);
+    fs.writeFile(jsonFilePath,updataJsonData,'utf-8' ,(err) => {
+        if(err){
+            console.error('Error writing file:',err);
+            return;
+        }
+    });
+
 }
 
 function generateUniqueId (){
