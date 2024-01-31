@@ -1,12 +1,23 @@
 const express = require('express');
 const router = express;
+const fs = require('fs');
+const path = require('path');
+
+const jsonFilePath = path.join(__dirname,'../data/data.json');
+
+function readData(){
+    return JSON.parse(fs.readFileSync(jsonFilePath,'utf-8'));
+}
+
 module.exports = (app) =>{
-    
-    let tutors = [];
-    app.locals.tutors = tutors;
+    const tutorsData = readData().tutors || [];
 
     app.get('/',(req, res) => {
-        res.render('index',{title:"Your Languages"});
+        res.render('index',{
+        title:"Your Languages", 
+        tutors:tutorsData
+    }
+        );
     });
     app.get('/teacher-form',(req,res) => {
         res.render('teacher-form', {title: "New teacher page"});
@@ -19,10 +30,16 @@ module.exports = (app) =>{
         let newTutor = {
             name: req.body.name,
             description: req.body.description,
-            date:new Date()
+            id:new Date()
         };
-        tutors.push(newTutor);
-        res.redirect('/');
+        res.redirect('/')
+        tutors.push(newTutor);;
         console.log(tutors);
     });
+}
+
+function generateUniqueId (){
+    const timestamp = new Date().getTime();
+    const randomPart = Math.floor(Math.random() * 1000);
+    return `${timestamp}-${randomPart}`;
 }
