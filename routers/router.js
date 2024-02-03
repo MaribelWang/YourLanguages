@@ -39,6 +39,17 @@ module.exports = (app) =>{
             res.redirect('/');
         }   
     });
+
+    app.delete('/teacher-form/:id/delete',(req,res) =>{
+        const data = readData();
+        const tutorIndex = data.tutors.findIndex((tutor) => tutor.id === req.params.id);
+        // console.log(req.params.id);
+        // console.log(data);
+        // console.log(tutorIndex);
+        data.tutors.splice(tutorIndex,1)
+        writeData(data);
+        res.redirect('/');
+    })
 }
 
 function writeData(data){
@@ -49,7 +60,6 @@ function writeData(data){
             return;
         }
     });
-
 }
 
 function generateUniqueId (){

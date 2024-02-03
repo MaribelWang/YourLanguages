@@ -6,14 +6,26 @@
 
     <% if(tutors.length){ %>
         <% tutors.forEach(function(tutor) { %>
-            <div class="card  ">
+            <div class="card">
                 <div class="d-flex justify-content-between bg-primary text-white">
                 <div class="card-header p-2">
                     <%= tutor.name %>
                 </div>
                 <div class=" pull-right p-2">
                         <%= tutor.id %>
+                        <a href="/teacher-form/<%= tutor.id %>/edit" 
+                           class="btn btn-primary pull-right text-primary" 
+                           style="background-color: #fff">Modify</a>
+                           <!--modify needs to jump to another page-->
+                        <form action="/teacher-form/<%= tutor.id %>/delete?_method=DELETE" 
+                           method="POST" 
+                           class="btn btn-primary pull-right text-danger">
+                           <input type="hidden" name="_method" value="DELETE">
+                           <button type="submit">Delete</button>
+                        </form>
+                           <!--delete doesn't need to jump to another page-->
                 </div>
+
             </div>
                 <div class="card-body text-black">
                     <%= tutor.description %>
