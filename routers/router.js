@@ -10,8 +10,6 @@ function readData(){
 }
 
 module.exports = (app) =>{
-    
-
     app.get('/',(req, res) => {
         const tutorsData = readData().tutors || [];
         res.render('index',{
@@ -19,8 +17,14 @@ module.exports = (app) =>{
         tutors:tutorsData
        });
     });
+
     app.get('/teacher-form',(req,res) => {
-        res.render('teacher-form', {title: "New teacher page"});
+        res.render('teacher-form',{
+            title:"Teacher form",
+            name:null,
+            description: null,
+            id:null
+        });
     });
 
     app.post('/teacher-form/create',(req,res) => {
@@ -40,6 +44,37 @@ module.exports = (app) =>{
         }   
     });
 
+
+    app.get('/teacher-form/:id/edit',(req,res) => {
+        const data = readData();
+        data.tutors.forEach(tutor => {
+            if(tutor.id === req.params.id){
+                res.render('teacher-form',{
+                    title:'Update profile',
+                    name: tutor.name,
+                    description: tutor.description,
+                    id: tutor.id
+                })
+                console.log(tutor);
+            }  
+        });
+    });
+
+    app.put('/teacher-form/:id/edit',(req,res) =>{
+        const data = readData();
+        if(!req.body.name || !req.body.description){
+            res.send(400).send('Teachers must have a name and a description');
+        }
+        data.tutors.forEach(tutor =>{
+            if(tutor.id === req.params.id){
+                tutor.name = req.body.name;
+                tutor.description = req.body.description;
+            }
+            console.log(tutor);
+        });
+        writeData(data);
+        res.redirect('/');
+    });
     app.delete('/teacher-form/:id/delete',(req,res) =>{
         const data = readData();
         const tutorIndex = data.tutors.findIndex((tutor) => tutor.id === req.params.id);
@@ -49,9 +84,8 @@ module.exports = (app) =>{
         data.tutors.splice(tutorIndex,1)
         writeData(data);
         res.redirect('/');
-    })
+    });
 }
-
 function writeData(data){
     const updataJsonData = JSON.stringify(data, null, 2);
     fs.writeFile(jsonFilePath,updataJsonData,'utf-8' ,(err) => {
