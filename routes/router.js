@@ -5,7 +5,7 @@ const path = require('path');
 
 const upload = require('../middlewares/upload');
 
-const jsonFilePath = path.join(__dirname,'../data/data.json');
+const jsonFilePath = path.join(__dirname,'../public/data/data.json');
 
 
 function readData(){
@@ -29,17 +29,19 @@ module.exports = (app) =>{
             id:null
         });
     });
-    
     app.post('/teacher-form/create',upload.single('avatar'), (req,res) => {
         const data = readData();
 
         if(!req.body.name || !req.body.description){
             res.send(400).send('The name and description should not be blank');
         }
+        let imagePath = req.file ? req.file.path : '';
+        imagePath = imagePath.replace(/^public\\/,'');
+
         let newTutor = {
             id:generateUniqueId(),
             name: req.body.name,
-            image: req.file.path,
+            image:imagePath,
             description: req.body.description
         };
         if(data != null){
@@ -49,9 +51,8 @@ module.exports = (app) =>{
         }   
     });
 
-
     app.get('/teacher-form/:id/edit',(req,res) => {
-        const data = readData();
+        const data = readData();    
         data.tutors.forEach(tutor => {
             if(tutor.id === req.params.id){
                 res.render('teacher-form',{
@@ -83,10 +84,8 @@ module.exports = (app) =>{
     app.delete('/teacher-form/:id/delete',(req,res) =>{
         const data = readData();
         const tutorIndex = data.tutors.findIndex((tutor) => tutor.id === req.params.id);
-        // console.log(req.params.id);
-        // console.log(data);
-        // console.log(tutorIndex);
-        data.tutors.splice(tutorIndex,1)
+        
+        data.tutors.splice(tutorIndex,1);
         writeData(data);
         res.redirect('/');
     });

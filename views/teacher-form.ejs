@@ -20,7 +20,10 @@
         <% }else{ %>
           action="/teacher-form/<%= id %>/edit?_method=PUT"
         <% } %>
+        enctype="multipart/form-data"
         >
+        <!--learn more about enctype-->
+
           <div class="form-group">
             <label for="name">Name:</label>
             <textarea type="text"
@@ -29,7 +32,7 @@
              class="form-control" 
              placeholder="Enter a new tutor"><%= name %></textarea>
           </div>
-
+         
           <div class="form-group" >
             <label for="body">Description:</label>
             <textarea 
@@ -40,7 +43,7 @@
              placeholder="I am an English teacher with N years experiences..." 
              required><%= description %></textarea>
           </div>
-          <input type="file" name= "avatar" accept="image/*" />
+          <input type="file" name= "avatar" id="imageUpload" accept="image/*" />
           <div class="form-group" style="margin-top: 5px;">
             <input type="submit" onclick="displayUserInfo()" value=
             <% if(id === null){ %>

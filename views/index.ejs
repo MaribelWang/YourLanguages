@@ -9,10 +9,12 @@
             <div class="card">
                 <div class="d-flex justify-content-between bg-primary text-white">
                 <div class="card-header p-2">
-                    <%= tutor.name %>
+                    <img src="<%= tutor.image %>" alt="User Avatar" style="width: 50px;">
+                    <%= tutor.name %>     
                 </div>
                 <div class=" pull-right p-2">
                         <%= tutor.id %>
+                        
                         <a href="/teacher-form/<%= tutor.id %>/edit" 
                            class="btn btn-primary pull-right text-primary" 
                            style="background-color: #fff">Modify</a>
@@ -26,7 +28,6 @@
                         </form>
                            <!--delete doesn't need to jump to another page-->
                 </div>
-
             </div>
                 <div class="card-body text-black">
                     <%= tutor.description %>

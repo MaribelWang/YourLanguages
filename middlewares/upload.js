@@ -2,7 +2,7 @@ const multer  = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads/') // 上传文件存储的路径
+      cb(null, 'public/uploads/') // 上传文件存储的路径
     },
     filename: function (req, file, cb) {
       const uniqueFileName = `${new Date().getTime()}_${file.originalname}`;

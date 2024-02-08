@@ -16,11 +16,12 @@ app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 
 app.use(express.static('public'));
+app.use('/', express.static(path.join(__dirname, '../public')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-require('./routers/router')(app);
+require('./routes/router')(app);
 
 app.listen(app.get('port'),() => {
     console.log(`server on port ${app.get('port')}`);
