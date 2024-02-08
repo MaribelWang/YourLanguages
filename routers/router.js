@@ -3,7 +3,10 @@ const router = express;
 const fs = require('fs');
 const path = require('path');
 
+const upload = require('../middlewares/upload');
+
 const jsonFilePath = path.join(__dirname,'../data/data.json');
+
 
 function readData(){
     return JSON.parse(fs.readFileSync(jsonFilePath,'utf-8'));
@@ -26,15 +29,17 @@ module.exports = (app) =>{
             id:null
         });
     });
-
-    app.post('/teacher-form/create',(req,res) => {
+    
+    app.post('/teacher-form/create',upload.single('avatar'), (req,res) => {
         const data = readData();
+
         if(!req.body.name || !req.body.description){
             res.send(400).send('The name and description should not be blank');
         }
         let newTutor = {
             id:generateUniqueId(),
             name: req.body.name,
+            image: req.file.path,
             description: req.body.description
         };
         if(data != null){

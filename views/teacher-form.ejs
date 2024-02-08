@@ -40,9 +40,9 @@
              placeholder="I am an English teacher with N years experiences..." 
              required><%= description %></textarea>
           </div>
-
+          <input type="file" name= "avatar" accept="image/*" />
           <div class="form-group" style="margin-top: 5px;">
-            <input type="submit" value=
+            <input type="submit" onclick="displayUserInfo()" value=
             <% if(id === null){ %>
               "Create"
             <% } else {%>
