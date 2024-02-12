@@ -66,7 +66,7 @@ module.exports = (app) =>{
         });
     });
 
-    app.put('/teacher-form/:id/edit',(req,res) =>{
+    app.put('/teacher-form/:id/edit',upload.single('avatar'),(req,res) =>{
         const data = readData();
         if(!req.body.name || !req.body.description){
             res.send(400).send('Teachers must have a name and a description');
@@ -75,16 +75,40 @@ module.exports = (app) =>{
             if(tutor.id === req.params.id){
                 tutor.name = req.body.name;
                 tutor.description = req.body.description;
+                
+                if(req.file != null){
+                    const filePath = path.join(__dirname,`../public/${tutor.image}`)
+
+                    fs.unlink(filePath,(err) =>{
+                        if(err){
+                            console.log(`Error deleting file: ${err.message}`);
+                        }else {
+                            console.log('File deleted successfully');
+                        }
+                    });
+                    let image = req.file.path;
+                    image = image.replace(/^public\\/, '');
+                    tutor.image = image;
+                }
             }
             console.log(tutor);
         });
         writeData(data);
         res.redirect('/');
     });
+
     app.delete('/teacher-form/:id/delete',(req,res) =>{
         const data = readData();
         const tutorIndex = data.tutors.findIndex((tutor) => tutor.id === req.params.id);
-        
+
+        const filePath = path.join(__dirname,`../public/${data.tutors[tutorIndex].image}`);
+        fs.unlink(filePath,(err) => {
+            if(err){
+                console.log(`Can not delete file: ${err.message}`);
+            }else{
+                console.log('File deleted successfully')
+            }
+        }) 
         data.tutors.splice(tutorIndex,1);
         writeData(data);
         res.redirect('/');
@@ -99,7 +123,6 @@ function writeData(data){
         }
     });
 }
-
 function generateUniqueId (){
     const timestamp = new Date().getTime();
     const randomPart = Math.floor(Math.random() * 1000);
