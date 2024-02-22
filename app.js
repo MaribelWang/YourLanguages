@@ -31,8 +31,8 @@ app.use('/', express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-require('./routes/router')(app);
-//app.use('/',require(path.join(__dirname,'routes/router')));
+//equire('./routes/router')(app);
+app.use('/',require(path.join(__dirname,'routes/router')));
 
 app.use((req,res,next) => {
     res.sendStatus(404);
