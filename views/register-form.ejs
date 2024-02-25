@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include ('partials/head.ejs') %>
+    <link rel="stylesheet" href="../public/css/login-register.css">
 <body>
     <div style="padding: 200px;">
         <h2 class="text-center">Register</h2>
         <form method="post" action="/register-form/create">
-            <div class="form">
+            <div class="form " >
                 <div style="display: flex; flex-direction: column;">
                     <input class="form-group" type="email" name="email"
                     placeholder="email@example.com" autofocus style="margin: 5px;">
                     <input class="form-group" type="password"
                     name="password" style="margin: 5px;">
                 </div>
+                <p class="remember">
+                    <input type="checkbox" id="remember" name="remember" value="1"/>
+                    <label for="remember">Remember me</label>
+                </p>
                 <div class="form-group">
                     <input type="submit" value="Register" class="btn btn-primary">
                 </div>

@@ -1,0 +1,12 @@
+  /* 添加的 CSS 样式 */
+  .centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 使容器的高度为视口高度 */
+    text-align: center; /* 文本居中对齐 */
+}
+
+.login-form-container {
+    padding: 20px; /* 根据需要调整内边距 */
+}

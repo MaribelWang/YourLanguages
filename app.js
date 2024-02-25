@@ -14,16 +14,22 @@ app.set('views', path.join(__dirname, 'views'));
 console.log(path.join(__dirname, 'views'));
 
 app.use(session({
-    secret:'my_secret',
-    resave:false,
-    saveUninitialized:true,
+    secret: 'your-secret-key', // 将此替换为您自己的密钥
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+        maxAge: 1000 * 60 * 60, // 会话失效时间为1小时
+        // 其他 cookie 选项（可选）
+    }
 }));
 
 const {sup} = require('./middlewares/middle');
+const cookieParser = require('cookie-parser');
 
 app.set('view engine', 'ejs');
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));
+app.use(cookieParser());
 
 app.use(express.static('public'));
 app.use('/', express.static(path.join(__dirname, '../public')));
