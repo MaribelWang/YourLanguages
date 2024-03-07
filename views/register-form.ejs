@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     <%- include ('partials/head.ejs') %>
-    <link rel="stylesheet" href="../public/css/login-register.css">
 <body>
     <div style="padding: 200px;">
         <h2 class="text-center">Register</h2>
@@ -9,9 +8,15 @@
             <div class="form " >
                 <div style="display: flex; flex-direction: column;">
                     <input class="form-group" type="email" name="email"
-                    placeholder="email@example.com" autofocus style="margin: 5px;">
-                    <input class="form-group" type="password"
-                    name="password" style="margin: 5px;">
+                    placeholder="email@example.com" autofocus style="margin: 5px;" 
+                    value="<%= locals.old && old.email %>" autocomplete="email">
+                    <% if (locals.errors && errors.email){ %>
+                        <p class="feedback"><%= errors.email.msg %></p>
+                        <% } %>
+                    <input class="form-group" type="password" name="password" style="margin: 5px;" autocomplete="current-password">
+                    <% if (locals.errors && errors.password){ %>
+                        <p class="feedback"><%= errors.password.msg %></p>
+                        <% } %> 
                 </div>
                 <p class="remember">
                     <input type="checkbox" id="remember" name="remember" value="1"/>

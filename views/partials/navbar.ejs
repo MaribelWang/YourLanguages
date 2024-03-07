@@ -9,9 +9,9 @@
     <a href="/show-all-tutors" class="btn btn-primary">Show all tutors</a>
     <p class="btn d-flex justify-content-end"><%= user.email %></p>
     <% if(user.email === "") {%>
-    <a href="/login-form" class="btn d-flex justify-content-end d-inline-block">Log in</a>
-    <% }else {%>
-    <a href="/log-out" class="btn d-flex justify-content-end d-inline-block">Log out</a>
+        <a href="/login-form" class="btn justify-content-end d-inline-block">Log in</a>
+     <% }else {%>
+    <a href="/log-out" class="btn justify-content-end d-inline-block">Log out</a>
     <div class="d-flex justify-content-end d-inline-block">
         <form action="/delete-account/<%= user.id %>?_method=DELETE" method="POST">
             <input type="hidden" name="_method" value="DELETE" />

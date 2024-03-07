@@ -9,7 +9,6 @@ const app = express();
 const bcrypt = require('bcryptjs');
 
 
-
 app.set('views', path.join(__dirname, 'views'));
 console.log(path.join(__dirname, 'views'));
 
@@ -18,7 +17,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: { 
-        maxAge: 1000 * 60 * 60, // 会话失效时间为1小时
+        maxAge: 24 * 60 * 60 * 1000, // 会话失效时间为1小时
         // 其他 cookie 选项（可选）
     }
 }));

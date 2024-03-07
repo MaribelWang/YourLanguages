@@ -43,7 +43,7 @@ const authController = {
                 if (req.body.remember) {
                     // 如果用户选择了“记住我”，设置 Cookie
                     res.cookie('Mycookie', user.email, {
-                        maxAge: 1000 * 60 * 60,
+                        maxAge: 1000 * 60 * 60 * 24,
                         //expires: new Date("2024-12-31"),
                         //httpOnly:true,
                         //secure: true

@@ -95,19 +95,19 @@ const tutorsController = {
         writeData(data,tutorsFilePath);
         res.redirect('/');
     },
-
+    
    deleteTutors:(req,res) =>{
         const data = readData(tutorsFilePath);
         const tutorIndex = data.tutors.findIndex((tutor) => tutor.id === req.params.id);
 
-        const filePath = path.join(__dirname,`../public/${data.tutors[tutorIndex].image}`);
-        fs.unlink(filePath,(err) => {
+        const FilePath = path.join(__dirname,`../public/${data.tutors[tutorIndex].image}`);
+        fs.unlink(FilePath,(err) => {
             if(err){
                 console.log(`Can not delete file: ${err.message}`);
             }else{
                 console.log('File deleted successfully')
             }
-        }) 
+        });
         data.tutors.splice(tutorIndex,1);
         writeData(data,tutorsFilePath);
         res.redirect('/');
