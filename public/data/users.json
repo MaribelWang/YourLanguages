@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "id": "1712691398897-248",
+      "name": "Jingwei",
+      "lastName": "Wang",
+      "email": "test@gmail.com",
+      "hashedPassword": "$2a$10$7WOjZzWrWVA1vuG5Xye43udSczPywEwPsrEZFYISjwGglzz0bRcoW",
+      "imagePath": "uploads\\1712691398809_avatar_girl_1.png"
+    },
+    {
+      "id": "1712759303670-389",
+      "name": "Carolina ",
+      "lastName": "R",
+      "email": "test1@gmail.com",
+      "hashedPassword": "$2a$10$sQpGQyWUdOcuUFT4NsU3hu6QDAzb1CcJANSGhLG3UMWOE4Ru8zPcO",
+      "imagePath": ""
+    }
+  ]
+}

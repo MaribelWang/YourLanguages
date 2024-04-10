@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include ('partials/head.ejs') %>
+<body class="container">
+    <%- include ('partials/header.ejs') %>
+
+    <div class="col-xs-8 col-xs-offset-2">
+        <h2 class="text-center">
+            <% if( id == null){ %>
+                Create a new teacher
+            <% } else { %>
+                Modify teacher
+            <% } %>
+            
+        </h2>
+
+        <!--Verify if we are modifying or creating an element-->
+        <form method="post" 
+        
+        <% if (id == null ){ %>
+            action="/teacher-form/create"
+        <% }else{ %>
+            action="/teacher-form/<%= id %>/edit?_method=PUT"
+        <% } %>
+
+        enctype="multipart/form-data"
+        >
+        
+            <div class="form-group">
+                <label for="title">Name:</label>
+                <textarea
+                class="form-control"
+                name="name" 
+                id="name"
+                placeholder="Teacher's name"
+                cols="30" 
+                rows="1"><%= name %></textarea>
+                
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea 
+                class="form-control"
+                name="description" 
+                id="description" 
+                cols="30" 
+                rows="3"
+                placeholder="I'm an English teacher with 3 years of experience"
+                required
+                ><%= description %></textarea>
+
+            </div>
+
+            <input type="file" name="avatar"/>
+
+            <div class="form-group">
+                <input 
+                type="submit"
+                 value= 
+                 <% if ( id == null ){ %>
+                    Create
+                <% }else{ %>
+                    Update
+                <% } %>
+
+                 class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
