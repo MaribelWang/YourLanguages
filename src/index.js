@@ -39,7 +39,7 @@ app.use(cookieParser())
 app.use(bp.json())
 app.use(bp.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname, '../public')))
-console.log(path.join(__dirname, '../public'))
+
 
 app.use(session({
     secret: 'my_secret',

@@ -1,103 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include ('partials/head.ejs') %>
+<%- include ('partials/head.ejs') %>
+<link rel="stylesheet" href="/css/style.css">
 <body>
-    <div style="padding: 50px;">
 
-        <form method="post" action="/register-form/create" enctype="multipart/form-data"><!--enctype="multipart/form-data"-->
- 
-                <div class="form">
-                <h2 class="text-center">Welcome to YourLanguages</h2>
-                <div style="display: flex; flex-direction: column;" class="d-flex flex-column bd-highlight mb-3">
-                <div class="p-2 bd-highlight">  
-                    <label for="First Name" class="fw-bold">First Name:</label>
-                    <input class="form-group" type="text" name="name" placeholder="First Name" 
-                    autofocus style="margin: 5px;" value="<%= locals.old && old.name %>" required>
-                </div>
-                    <% if (locals.errors && errors.name) { %> 
-                        <p class="feedback"><%= errors.name.msg %></p> 
-                        <% } %>
-                <div class="p-2 bd-highlight">
-                    <label for="Last Name" class="fw-bold">Last Name:</label>
-                    <input class="form-group" type="text" name="lastName" placeholder="Last Name" 
-                    autofocus style="margin: 5px;" value="<%= locals.old && old.lastName %>" required>
-                </div>
-                    <% if (locals.errors && errors.name) { %> 
-                        <p class="feedback"><%= errors.name.msg %></p> 
-                        <% } %>
-                <div class="p-2 bd-highlight">
-                    <label for="email" class="fw-bold">Your Email:</label>
-                    <input class="form-group" type="text" name="email" placeholder="email@example.com"
-                     autofocus style="margin: 5px;" value="<%= locals.old && old.email %>" required>
-                </div>
-                    <% if (locals.errors && errors.email) { %> 
-                        <p class="feedback"><%= errors.email.msg %></p> 
-                        <% } %>
+    <div class="login-container">
 
-                <div class="p-2 bd-highlight">
-                    <label for="password" class="fw-bold">Password:</label>
-                    <input class="form-group" type="password" name="password" 
-                    placeholder="Your Password" style="margin: 5px;" required>
-                </div>
-                    <% if (locals.errors && errors.password) { %> 
-                        <p class="feedback"><%= errors.password.msg %></p> 
-                        <% } %>
-                    
-<!--Other important thing that it can add is a second password field and verify that both are the same, do it later!-->
-                    
-                    <input type="file" name="avatar"/>
+        <h2>Welcome to YourLanguages</h2>
 
-                    <label for="gender" class="fw-bold">Gender</label>
-                    <select class="form-select form-select-sm" aria-label="Small select example">
-                            <option selected>Don't want to say</option>
-                            <option value="1">Male</option>
-                            <option value="2">Female</option>
-                            <option value="3">Non-binary</option>
-                        </select>
-                    </label>
-
-                   
-                    <!-- Option buttons to select account type -->
-                    <label for="account" class="fw-bold">Account Type</label>
-                    <select class="form-select form-select-sm" aria-label="Small select example">
-                        <option selected>Teacher</option>
-                        <option value="1">Student</option>
-                    </select>
-                    
-                    <label for="account" class="fw-bold">Language You want to Learn</label>
-                    <select class="form-select form-select-sm" aria-label="Small select example">
-                        <option selected>English</option>
-                        <option value="1">Spanish</option>
-                        <option value="2">France</option>
-                        <option value="3">Chinese</option>
-                        <option value="4">Catalan</option>
-                        <option value="5">Japanese</option>
-                        <option value="6">German</option>
-                        <option value="7">Russian</option>
-                        <option value="8">Italian</option>
-                        <option value="9">Arabic</option>
-                        <option value="10">Korean</option>
-                        <option value="11">Portuguese</option>
-                    </select>
-
-                </div>
-
-                <p class="remember">
-                    <input type="checkbox" id="remember" name="remember" value="1" />
-                    <label for="remember">Remember me</label>
-                </p>
-    
-                <div class="form-group">
-                    <input type="submit" value= "Register" class="btn btn-primary">
-                </div>
-
-                <p>Already have an account?</p>
-                <a href="/login-form" class="btn btn-primary">Login</a>
+        <form method="post" action="/register-form/create" enctype="multipart/form-data" class="login-form">
+            <!-- First Name -->
+            <div class="form-group">
+                <label for="FirstName">First Name:</label>
+                <input type="text" name="name" placeholder="First Name" 
+                autofocus value="<%= locals.old && old.name %>" required>
             </div>
-            
+            <% if (locals.errors && errors.name) { %> 
+                <p class="feedback"><%= errors.name.msg %></p> 
+            <% } %>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <label for="LastName">Last Name:</label>
+                <input type="text" name="lastName" placeholder="Last Name" 
+                value="<%= locals.old && old.lastName %>" required>
+            </div>
+            <% if (locals.errors && errors.lastName) { %> 
+                <p class="feedback"><%= errors.lastName.msg %></p> 
+            <% } %>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Your Email:</label>
+                <input type="text" name="email" placeholder="email@example.com"
+                 value="<%= locals.old && old.email %>" required>
+            </div>
+            <% if (locals.errors && errors.email) { %> 
+                <p class="feedback"><%= errors.email.msg %></p> 
+            <% } %>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" 
+                placeholder="Your Password" required>
+            </div>
+            <% if (locals.errors && errors.password) { %> 
+                <p class="feedback"><%= errors.password.msg %></p> 
+            <% } %>
+
+            <!-- File Upload -->
+            <div class="form-group">
+                <label for="avatar">Profile Picture:</label>
+                <input type="file" name="avatar" class="form-control-file"/>
+            </div>
+
+            <!-- Gender Selection -->
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select name="gender" class="form-control">
+                    <option value="0">Don't want to say</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                    <option value="3">Non-binary</option>
+                </select>
+            </div>
+
+            <!-- Account Type Selection -->
+            <div class="form-group">
+                <label for="accountType">Account Type:</label>
+                <select name="accountType" class="form-control">
+                    <option value="teacher">Teacher</option>
+                    <option value="student">Student</option>
+                </select>
+            </div>
+
+            <!-- Language Selection -->
+            <div class="form-group">
+                <label for="language">Language You Want to Learn:</label>
+                <select name="language" class="form-control">
+                    <option selected>English</option>
+                    <option value="1">Spanish</option>
+                    <option value="2">France</option>
+                    <option value="3">Chinese</option>
+                    <option value="4">Catalan</option>
+                    <option value="5">Japanese</option>
+                    <option value="6">German</option>
+                    <option value="7">Russian</option>
+                    <option value="8">Italian</option>
+                    <option value="9">Arabic</option>
+                    <option value="10">Korean</option>
+                    <option value="11">Portuguese</option>
+                </select>
+            </div>
+
+            <!-- Remember Me Checkbox -->
+            <div class="form-group">
+                <input type="checkbox" id="remember" name="remember" value="1" />
+                <label for="remember">Remember me</label>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <input type="submit" value="Register" class="btn btn-primary">
+            </div>
+
+            <!-- Login Redirect -->
+            <p class="alternate-link">Already have an account? <a href="/login-form">Login</a></p>
+
         </form>
 
-        
     </div>
 
 </body>

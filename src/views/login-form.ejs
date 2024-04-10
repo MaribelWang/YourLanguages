@@ -1,49 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include ('partials/head.ejs') %>
+<%- include('partials/head.ejs') %>
+<link rel="stylesheet" href="/css/style.css">
 <body>
 
-    <div style="padding: 200px;">
-        
-        <form method="post" action="/login">
+    <div class="login-container">
 
-            <div class="form">
-                <h2 class="text-center">Login to Your Account</h2>
-                <div style="display: flex; flex-direction: column;">
-                    <div>
-                        <label for="Email" class="fw-bold">Your Email</label>
-                        <input class="form-group" type="text" name="email" 
-                        placeholder="email@example.com" autofocus style="margin: 5px;" 
-                        value="<%= locals.old && old.email %>" >
-                    </div>     
-                    <% if (locals.errors && errors.email) { %> 
-                        <p class="feedback"><%= errors.email.msg %></p> 
-                        <% } %>
-                    <div>
-                        <label for="password" class="fw-bold">Password:</label>
-                        <input class="form-group" type="password" name="password" 
-                        placeholder="Your Password" style="margin: 5px;" >
-                    </div>
-                    <% if (locals.errors && errors.password) { %> 
-                        <p class="feedback"><%= errors.password.msg %></p> 
-                        <% } %>
-                </div>
+        <h2>Login to Your Account</h2>
 
-                <p class="remember">
-                    <input type="checkbox" id="remember" name="remember" value="1" />
-                    <label for="remember">Remember me</label>
-                </p>
-    
-                <div class="form-group">
-                    <input type="submit" value= "Login" class="btn btn-primary">
-                </div>
-
-                <p>Doesn't have an account?</p>
-                <a href="/register-form" class="btn btn-primary">Register</a>
+        <form method="post" action="/login" class="login-form">
+            <div class="form-group">
+                <label for="Email">Your Email:</label>
+                <input type="text" name="email" placeholder="email@example.com" 
+                autofocus value="<%= locals.old && old.email %>">
+                <% if (locals.errors && errors.email) { %> 
+                    <p class="feedback"><%= errors.email.msg %></p> 
+                <% } %>
             </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" placeholder="Enter Your Password">
+                <% if (locals.errors && errors.password) { %> 
+                    <p class="feedback"><%= errors.password.msg %></p> 
+                <% } %>
+            </div>
+
+            <div class="form-group remember">
+                <input type="checkbox" id="remember" name="remember" value="1" />
+                <label for="remember">Remember me</label>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary">
+            </div>    
+            
+            <p class="alternate-link">Doesn't have an account? <a href="/register-form">Register</a></p>
         </form>
 
-        
     </div>
 
 </body>
