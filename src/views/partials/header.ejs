@@ -14,15 +14,19 @@
                         <small class="text-dark"><%= user.email %></small>
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
-                        <li><a class="dropdown-item" href="/edit-profile/<%= user.id %>">Edit Profile</a></li>
-                        <li><a class="dropdown-item text-danger" href="/log-out">Log out</a></li>
+                        <li>
+                            <a class="dropdown-item" href="/edit-profile/<%= user.id %>" data-profile="true">Edit Profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-danger" href="/log-out" id="logout-button">Log out</a>
+                        </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li>
                             <form action="/delete-account/<%= user.id %>?_method=DELETE" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="dropdown-item text-danger" type="submit">Delete account</button>
+                                <button class="dropdown-item text-danger delete-account-button" type="submit">Delete account</button>
                             </form>
                         </li>
                     </ul>
