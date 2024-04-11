@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<%- include ('partials/head.ejs') %>
+<%- include('partials/head.ejs') %>
 <body class="container mt-4">
-    <%- include ('partials/header.ejs') %>
+    <%- include('partials/header.ejs') %>
 
     <% if(users.length){ %>
-
-        <!-- Dropdown menu for selecting subject -->
-        <!-- Language Selection -->
         <div class="form-group" style="margin-bottom: 10px;">
             <label for="language" id="languageLabel">Select Subject:</label>
             <select name="language" class="form-control" id="language">
@@ -27,70 +24,24 @@
             </select>
         </div>
 
+        <div class="row" id="userList"></div>
+    <% } %>
+
+    <% if(users.length){ %>
+        <!-- Embed users data in the page -->
+        <script type="application/json" id="users-data">
+            <%- JSON.stringify(users) %>
+        </script>
+        
+        <div class="form-group" style="margin-bottom: 10px;">
+            <!-- Your dropdown and other HTML content here -->
+        </div>
+
         <div class="row" id="userList">
             <!-- Users will be dynamically added here -->
         </div>
-
     <% } %>
 
-    <script>
-        var languageSelection = document.getElementById('language');
-        var user = <%- JSON.stringify(user) %>; 
-        var users = <%- JSON.stringify(users) %>;
-
-        function filterUsers(language) {
-            if (language === "All Languages") {
-                return users; // Return all users if "All Languages" is selected
-            }
-
-            var filteredUsers = users.filter(function(element) {
-                return element.language === language;
-            });
-    
-            return filteredUsers;
-        }
-
-        function displayUsers(filteredUsers) {
-            var userList = document.getElementById('userList');
-            userList.innerHTML = ''; // Clear previous user list
-    
-            filteredUsers.forEach(function(element) {
-                var userCard = document.createElement('div');
-                userCard.className = 'col-lg-4 col-md-6 mb-3';
-                userCard.innerHTML = `
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-header bg-success text-white">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <img src="${element.imagePath}" class="rounded-circle" alt="${element.name}" style="width: 50px; height: 50px;">
-                                <div class="ms-2">
-                                    <h5 class="mb-0">${element.firstName} ${element.lastName}</h5>
-                                    <small>${element.email}</small>
-                                </div>
-                                <span class="badge bg-danger">${element.userType}</span>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">${element.description}</p>
-                        </div>
-                    </div>
-                `;
-                userList.appendChild(userCard);
-            });
-        }
-    
-        languageSelection.addEventListener('change', function() {
-            var selectedLanguage = languageSelection.value;
-            console.log('Selected Language:', selectedLanguage);
-    
-            var filteredUsers = filterUsers(selectedLanguage);
-    
-            displayUsers(filteredUsers);
-        });
-    
-        var initialLanguage = languageSelection.value;
-        var initialFilteredUsers = filterUsers(initialLanguage);
-        displayUsers(initialFilteredUsers);
-    
-    </script>
+    <script src="/js/filterUser.js"></script>
 </body>
 </html>
