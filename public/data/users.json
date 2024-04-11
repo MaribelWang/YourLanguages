@@ -15,6 +15,24 @@
       "email": "test1@gmail.com",
       "hashedPassword": "$2a$10$sQpGQyWUdOcuUFT4NsU3hu6QDAzb1CcJANSGhLG3UMWOE4Ru8zPcO",
       "imagePath": ""
+    },
+    {
+      "id": "1712820468459-376",
+      "name": "Pol",
+      "lastName": "Ramirez",
+      "email": "test2@gmail.com",
+      "gender": "1",
+      "hashedPassword": "$2a$10$rfo7tpw9G3TlnGFnfbbw7.q7pb0kDgU3fhXQ2yXq5DMFvHi1Xl8dq",
+      "imagePath": "uploads\\1712820468374_avatar_boy_3.png"
+    },
+    {
+      "id": "1712820567300-780",
+      "name": "Fernando",
+      "lastName": "A",
+      "email": "test3@gmail.com",
+      "gender": "0",
+      "hashedPassword": "$2a$10$4VmSMS9GjKmcitLdSBg2revFSkm.11NWr8jIUuPd9oHhM667J8q6.",
+      "imagePath": "uploads\\1712820567217_avatar_boy_1.png"
     }
   ]
 }

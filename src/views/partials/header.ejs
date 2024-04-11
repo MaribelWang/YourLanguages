@@ -1,25 +1,30 @@
 <nav>
     <a href="/" class="navbar" style="display: inline-block; padding: 10px;  border-radius: 5px;">
         <img src="/assets/logo.png" class="navbar-logo" alt="logo" style="width: 100px; height: auto;" />
-   
+    </a> <!-- 确保 logo 链接有一个闭合标签 -->
+
     <% if (user.email == "") { %>
         <a href="/login-form" class="btn btn-primary pull-right" style="background-color: blue;">Log in</a>
-        <a href="/register-form" class="btn btn-primary pull-right" style="background-color: blue;">Sign Up</a>
+        <a href="/register-form" class="btn btn-primary pull-right" style="background-color: blue;">Register</a>
     <% } else { %>
-        <a href="/log-out" class="btn btn-primary pull-right" style="background-color: blue;">Log Out</a>
+        <a href="/log-out" class="btn btn-primary pull-right" style="background-color: blue;">Log out</a>
+        
+        <!-- 删除账户表单 -->
         <form action="/delete-account/<%= user.id %>?_method=DELETE" method="POST" class="btn pull-right">
             <input type="hidden" name="_method" value="DELETE">
-            <button type="submit" style="background-color: red; border-radius: 5px;">Delete Account</button>
+            <button type="submit" style="background-color: red; border-radius: 5px;">Delete account</button>
         </form>
 
-        <!-- Data of the user if a session exists -->
-        <button type="button">
-            <img 
-            style="border-radius: 50%; width: 50px; height: 50px;" 
-            src="<%= user.imagePath %>" 
-            alt="Button Image"
-            title="My Profile">
-        </button>
+        <!-- 个人资料按钮/图片 -->
+        <a href="/edit-profile/<%= user.id %>" class="btn pull-right">
+        <img 
+        style="border-radius: 50%; width: 50px; height: 50px;" 
+        src="<%= user.imagePath %>"
+        alt="User Image" 
+        title="Edit My Profile"
+        >
+    </a>
+
         
         <h1><%= user.email %></h1>
     <% } %>

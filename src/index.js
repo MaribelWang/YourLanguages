@@ -39,6 +39,7 @@ app.use(cookieParser())
 app.use(bp.json())
 app.use(bp.urlencoded({extended:false}))
 app.use(express.static(path.join(__dirname, '../public')))
+app.use('/uploads', express.static('uploads'));
 
 
 app.use(session({

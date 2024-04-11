@@ -24,6 +24,12 @@ const User = sequelize.define('Users', {
     imagePath: {
         type: DataTypes.STRING
     },
+    languageRequired: {
+        type: DataTypes.STRING
+    },
+    description: {
+        type: DataTypes.STRING
+    }
 },{
     //Here you can add aditional config like
     //timestamps: false

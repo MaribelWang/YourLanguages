@@ -107,13 +107,13 @@ const authController = {
             )
         }   
     },
-    goToSingUpForm: (req, res) => {
+    goToSignUpForm: (req, res) => {
         res.render('register-form',
         {
             title: 'register-form'
         })
     },
-    singUp: (req, res) => {
+    signUp: (req, res) => {
         const data = readData(usersFilePath)
         let errors = validationResult(req)
     

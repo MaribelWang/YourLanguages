@@ -1,8 +1,45 @@
 body {
-  font-family: 'Arial', sans-serif;
   background-color: #f4f4f4;
-  margin: 60px;
-  padding: 0;
+  color: #333;
+  margin-top: 20px;
+}
+
+.user-card {
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.user-card-header {
+  background-color: #4cae4c; /* 绿色主题色 */
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.user-image {
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.user-info h5 {
+  margin: 0;
+}
+
+.user-info p {
+  margin: 5px 0;
+}
+
+.user-type {
+  color: red; /* 根据需要调整颜色 */
+}
+
+/* Bootstrap覆盖样式 */
+.panel-primary>.panel-heading {
+  background-color: #4cae4c; /* 绿色主题色 */
 }
 
 .login-container {

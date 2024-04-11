@@ -1,30 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('partials/head.ejs') %>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<body class="container my-4">
-    <%- include('partials/header.ejs') %>
+    <%- include ('partials/head.ejs') %>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> <!-- 确保这里引用了Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/style.css"> <!-- 您自定义的样式表 -->
+<body class="container">
+    <%- include ('partials/header.ejs') %>
 
-    <% if(users.length){ %>
-        <div class="row">
-            <% users.forEach(function(element) { %>
-                <% if (user.userType !== element.userType) { %>
-                    <div class="col-md-4 mb-3">
-                        <div class="card h-100">
-                            <div class="card-header bg-success text-white">
-                                <%= element.name %> <%= element.lastName %>
+    <%if(users.length){ %>
+
+        <!--Show only the oposite type of users of the actual user (If a student logs he/she only see teachers displayed)-->
+        <% if (user.userType === "teacher") { %>
+            <% users.filter(element => element.userType === "student").forEach(student => { %>
+                <div class="panel panel-primary" style="margin: 3px;">
+                    <div class="panel-heading" style="background-color: rgb(61, 61, 248); display: flex; flex-direction: row;">
+                        <img style="width: 50px; height: 50px;" src="<%= student.imagePath %>">
+                        <div style="color: white; display: flex; justify-content: space-around; align-items: center; width: 100%;">
+                            <div>
+                                <label><%= student.name %></label>
+                                <label><%= student.lastName %></label>
                             </div>
-                            <img src="<%= element.imagePath %>" class="card-img-top" alt="Profile image" style="object-fit: cover; height: 200px;">
-                            <div class="card-body">
-                                <h5 class="card-title"><%= element.email %></h5>
-                                <p class="card-text text-danger"><%= element.userType %></p>
-                            </div>
+                            <label><%= student.email %></label>
+                            <label style="color: red;"><%= student.userType %></label>
                         </div>
                     </div>
-                <% } %>
+                </div>
             <% }) %>
-        </div>
-    <% } %>
+        <% } else if(user.userType === "student") { %>
+            <% users.filter(element => element.userType === "teacher").forEach(teacher => { %>
+                <div class="panel panel-primary" style="margin: 3px;">
+                    <div class="panel-heading" style="background-color: rgb(61, 61, 248); display: flex; flex-direction: row;">
+                        <img style="width: 50px; height: 50px;" src="<%= teacher.imagePath %>">
+                        <div style="color: white; display: flex; justify-content: space-around; align-items: center; width: 100%;">
+                            <div>
+                                <label><%= teacher.name %></label>
+                                <label><%= teacher.lastName %></label>
+                            </div>
+                            <label><%= teacher.email %></label>
+                            <label style="color: red;"><%= teacher.userType %></label>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        <%} else { %>
+            <% users.forEach(function(element) { %>
+                    <div class="panel panel-primary" style="margin: 3px;">
+    
+                        <div class="panel-heading" style="background-color: rgb(61, 61, 248); display: flex; flex-direction: row;">
+                            <img style=" width: 50px; height: 50px;" src=<%= element.imagePath %>>
+                            <div style="color: white; display: flex; justify-content: space-around;  align-items: center; width: 100%;" >
+                                <div>
+                                    </label><%= element.name %></label>
+                                    </label><%= element.lastName %></label>
+                                </div>
+                                </label><%= element.email %></label>
+                                <label style="color: red;"><%= element.userType%></label>
+                            </div>
+                        </div>
+                        
+                    </div>            
+           <% }) %>
+        <%} %>
 
+        
+    <% } %>
+    
 </body>
 </html>
