@@ -137,7 +137,7 @@ const authController = {
             //Using the model instead of declaring the variable
             const newUser = new User(
                 generateUniqueId(),
-                req.body.name,
+                req.body.firstName,
                 req.body.lastName,
                 req.body.email,
                 req.body.gender,
