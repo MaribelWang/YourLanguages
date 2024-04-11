@@ -21,7 +21,7 @@ const authController = {
         
         // Make sure to add a default value in the case jsonData comes empty
         const users = readData(usersFilePath).users || []
-
+        console.log("image path" + users.imagePath);
         res.render('home', {
             title: "Home",
             users: users,
@@ -169,8 +169,6 @@ const authController = {
                 }
             )
         }
-    
-        
     }
 }
 

@@ -9,7 +9,7 @@
       "userType": "teacher",
       "hashedPassword": "$2a$10$dL5dH6BVy9t3S4CMp0So/ehuxw5AIxgt0RI0M85UBD5vJ9OdPJNWO",
       "imagePath": "uploads\\1712832997877_avatar_boy_2.png",
-      "language": "2",
+      "language": "France",
       "description": "I'm a France teacher with 5 years of experience..."
     },
     {
@@ -21,7 +21,7 @@
       "userType": "student",
       "hashedPassword": "$2a$10$XB3czYrfjS0Aylixbqw.Ue4JeGEFCG5lAwJvmDDg6XiGTxTSNIGrK",
       "imagePath": "uploads\\1712833507034_avatar_girl_1.png",
-      "language": "1",
+      "language": "Spanish",
       "description": "I'd like to practice more Spanish, I'm now in a level of B2,  ......"
     },
     {
@@ -33,7 +33,7 @@
       "userType": "student",
       "hashedPassword": "$2a$10$NUjwJuFohfjnVTdTxNGaHul/oAYu2r8w.SJOcDRkmhILC7bDvKHx2",
       "imagePath": "uploads\\1712833960264_avatar_girl_3.png",
-      "language": "3",
+      "language": "Chinese",
       "description": "I want to travel one day in China, so i'm learning Chinese....."
     },
     {
@@ -57,18 +57,19 @@
       "userType": "teacher",
       "hashedPassword": "$2a$10$5m7b6GqrgVb93CWCx9sHpecCjDf0RSqwvVtpf38wWL2be5os4zF/q",
       "imagePath": "uploads\\1712835479025_æ¶å°èä¸ç·.png",
-      "language": "6",
-      "description": "i‘ve lived in German for more than 10 years, and i speak 5 languages......"
+      "language": "German",
+      "description": "I've lived in German for more than 10 years, and i speak 5 languages......"
     },
     {
       "id": "1712838343125-731",
+      "firstName": "Fernando",
       "lastName": "S",
       "email": "test10@gmail.com",
       "gender": "1",
       "userType": "teacher",
       "hashedPassword": "$2a$10$ttJdsL1qhFLGUk0t8gFwWOuaMJn4telrsVIzWYHiiKGmnx86qr9xe",
       "imagePath": "uploads\\1712838343051_äºèç½èä¸ç·.png",
-      "language": "4",
+      "language": "Catalan",
       "description": "Native Catalan helps you to learn it from scratch......"
     }
   ]

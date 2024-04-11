@@ -11,19 +11,18 @@
         <div class="form-group" style="margin-bottom: 10px;">
             <label for="language" id="languageLabel">Select Subject:</label>
             <select name="language" class="form-control" id="language">
-                <option value="All Languages" selected>All Languages</option>
-                <option value="English">English</option>
-                <option value="Spanish">Spanish</option>
-                <option value="France">France</option>
-                <option value="Chinese">Chinese</option>
-                <option value="Catalan">Catalan</option>
-                <option value="Japanese">Japanese</option>
-                <option value="German">German</option>
-                <option value="Russian">Russian</option>
-                <option value="Italian">Italian</option>
-                <option value="Arabic">Arabic</option>
-                <option value="Korean">Korean</option>
-                <option value="Portuguese">Portuguese</option>
+                <option value="0" selected>English</option>
+                <option value="1">Spanish</option>
+                <option value="2">France</option>
+                <option value="3">Chinese</option>
+                <option value="4">Catalan</option>
+                <option value="5">Japanese</option>
+                <option value="6">German</option>
+                <option value="7">Russian</option>
+                <option value="8">Italian</option>
+                <option value="9">Arabic</option>
+                <option value="10">Korean</option>
+                <option value="11">Portuguese</option>
             </select>
         </div>
 
@@ -34,27 +33,44 @@
     <% } %>
 
     <script>
+        // Get the select element by its ID
         var languageSelection = document.getElementById('language');
-        var user = <%- JSON.stringify(user) %>; 
-        var users = <%- JSON.stringify(users) %>;
+        // Remember that "user" and "users" are not the same
+        // "user" is the logged account while "users" is the entire list of elements of the db/json
+        //var user = <%- JSON.stringify(user) %>; 
+        // I HAD A PROBLEM READING THE ACCOUNT PROBABLY BECAUSE SOME PROBLEMS WITH THE SESSION
+        //var users = <%- JSON.stringify(users) %>;
+        //console.log("user: "+user.firstName)
+        //console.log("users: " + users)
 
+        // Function to filter users based on language selection
+        // Verify the user type, price and selected language 
         function filterUsers(language) {
-            if (language === "All Languages") {
-                return users; // Return all users if "All Languages" is selected
-            }
-
+            
             var filteredUsers = users.filter(function(element) {
+                // Modify this condition based on your data structure
+                /*
+                if (user.userType === "student") {
+                    console.log("This is a student account")
+                    return element.language === language;
+                }
+                */
                 return element.language === language;
+                // Here is where we add the filters, we can add more for teachers accounts
+                // ...
+                
             });
     
             return filteredUsers;
         }
-
+    
+        // Function to display filtered users
         function displayUsers(filteredUsers) {
             var userList = document.getElementById('userList');
             userList.innerHTML = ''; // Clear previous user list
     
             filteredUsers.forEach(function(element) {
+                // Create HTML elements to display user information
                 var userCard = document.createElement('div');
                 userCard.className = 'col-lg-4 col-md-6 mb-3';
                 userCard.innerHTML = `
@@ -74,19 +90,26 @@
                         </div>
                     </div>
                 `;
+    
+                // Append user card to user list
                 userList.appendChild(userCard);
             });
         }
     
+        // Add an event listener for the change event
         languageSelection.addEventListener('change', function() {
+            // Get the value of the selected option
             var selectedLanguage = languageSelection.value;
             console.log('Selected Language:', selectedLanguage);
     
+            // Filter users based on selected language
             var filteredUsers = filterUsers(selectedLanguage);
     
+            // Display filtered users
             displayUsers(filteredUsers);
         });
     
+        // Initial display of users when the page loads
         var initialLanguage = languageSelection.value;
         var initialFilteredUsers = filterUsers(initialLanguage);
         displayUsers(initialFilteredUsers);
