@@ -1,38 +1,28 @@
 {
   "users": [
     {
-      "id": "1712691398897-248",
-      "name": "Jingwei",
+      "id": "1712832997965-751",
+      "firstName": "Hernan",
+      "lastName": "Fernando",
+      "email": "test4@gmail.com",
+      "gender": "1",
+      "userType": "teacher",
+      "hashedPassword": "$2a$10$dL5dH6BVy9t3S4CMp0So/ehuxw5AIxgt0RI0M85UBD5vJ9OdPJNWO",
+      "imagePath": "uploads\\1712832997877_avatar_boy_2.png",
+      "language": "2",
+      "description": "I'm a France teacher with 5 years of experience..."
+    },
+    {
+      "id": "1712833507131-868",
+      "firstName": "Jingwei",
       "lastName": "Wang",
       "email": "test@gmail.com",
-      "hashedPassword": "$2a$10$7WOjZzWrWVA1vuG5Xye43udSczPywEwPsrEZFYISjwGglzz0bRcoW",
-      "imagePath": "uploads\\1712691398809_avatar_girl_1.png"
-    },
-    {
-      "id": "1712759303670-389",
-      "name": "Carolina ",
-      "lastName": "R",
-      "email": "test1@gmail.com",
-      "hashedPassword": "$2a$10$sQpGQyWUdOcuUFT4NsU3hu6QDAzb1CcJANSGhLG3UMWOE4Ru8zPcO",
-      "imagePath": ""
-    },
-    {
-      "id": "1712820468459-376",
-      "name": "Pol",
-      "lastName": "Ramirez",
-      "email": "test2@gmail.com",
-      "gender": "1",
-      "hashedPassword": "$2a$10$rfo7tpw9G3TlnGFnfbbw7.q7pb0kDgU3fhXQ2yXq5DMFvHi1Xl8dq",
-      "imagePath": "uploads\\1712820468374_avatar_boy_3.png"
-    },
-    {
-      "id": "1712820567300-780",
-      "name": "Fernando",
-      "lastName": "A",
-      "email": "test3@gmail.com",
-      "gender": "0",
-      "hashedPassword": "$2a$10$4VmSMS9GjKmcitLdSBg2revFSkm.11NWr8jIUuPd9oHhM667J8q6.",
-      "imagePath": "uploads\\1712820567217_avatar_boy_1.png"
+      "gender": "2",
+      "userType": "student",
+      "hashedPassword": "$2a$10$XB3czYrfjS0Aylixbqw.Ue4JeGEFCG5lAwJvmDDg6XiGTxTSNIGrK",
+      "imagePath": "uploads\\1712833507034_avatar_girl_1.png",
+      "language": "1",
+      "description": "I'd like to practice more Spanish, I'm now in a level of B2,  ......"
     }
   ]
 }

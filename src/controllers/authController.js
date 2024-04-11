@@ -119,7 +119,11 @@ const authController = {
     
         // If there are no erros sing up normally
         console.log(errors)
-        if(errors.isEmpty()){
+        if (errors.isEmpty()) {
+
+        let language = req.body.language; // 接收表单提交的语言
+        let description = req.body.description; // 接收表单提交的描述
+        let userType = req.body.userType; // 接收表单提交的账户类型
             // hash password
             let hash = bcrypt.hashSync(req.body.password, 10);
 
@@ -129,7 +133,7 @@ const authController = {
             // Delete the "public" word
             if (imagePath != '')
                 imagePath = imagePath.replace(/^public\\/, '');
-    
+ 
             //Using the model instead of declaring the variable
             const newUser = new User(
                 generateUniqueId(),
@@ -139,7 +143,9 @@ const authController = {
                 req.body.gender,
                 req.body.userType,
                 hash,
-                imagePath
+                imagePath,
+                language,
+                description
             )
     
             if(data != null){
@@ -168,4 +174,4 @@ const authController = {
     }
 }
 
-module.exports = authController
+module.exports = authController;
