@@ -1,34 +1,58 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/">
-            <img src="/assets/logo.png" alt="logo" style="width: 100px; height: auto;"/>
-        </a>
-        <div class="d-flex align-items-center">
-            <% if (user.email == "") { %>
-                <a href="/login-form" class="btn btn-outline-success me-2">Log in</a>
-                <a href="/register-form" class="btn btn-success">Register</a>
-            <% } else { %>
-                <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="<%= user.imagePath %>" alt="User Image" class="rounded-circle me-2" style="width: 50px; height: 50px;"/>
-                        <small class="text-dark"><%= user.email %></small>
-                    </a>
-                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
-                        <li><a class="dropdown-item" href="/edit-profile/<%= user.id %>">Edit Profile</a></li>
-                        <li><a class="dropdown-item text-danger" href="/log-out">Log out</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <form action="/delete-account/<%= user.id %>?_method=DELETE" method="POST">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button class="dropdown-item text-danger" type="submit">Delete account</button>
-                            </form>
-                        </li>
-                    </ul>
-                </div>
-            <% } %>
+
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head.ejs') %>
+<body class="container mt-4">
+    <%- include('partials/header.ejs') %>
+
+    <% if(users.length){ %>
+        <div class="mb-3">
+            <label for="language" 
+            class="form-label" 
+            id="languageLabel">
+            Select by Subjects:
+        </label>
+            <select name="language" 
+            class="form-select" 
+            id="language" 
+            aria-describedby="languageHelpBlock">
+                <option value="All Languages" selected>
+                    All Languages</option>
+                <option value="English">English</option>
+                <option value="Spanish">Spanish</option>
+                <option value="France">France</option>
+                <option value="Chinese">Chinese</option>
+                <option value="Catalan">Catalan</option>
+                <option value="Japanese">Japanese</option>
+                <option value="German">German</option>
+                <option value="Russian">Russian</option>
+                <option value="Italian">Italian</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Korean">Korean</option>
+                <option value="Portuguese">Portuguese</option>
+            </select>
+            <div id="languageHelpBlock" class="form-text">
+
+        <div class="row" id="userList"></div>
+        <% } %>
         </div>
+
     </div>
-</nav>
-<hr>
+    <% if(users.length){ %>
+        <!-- Embed users data in the page -->
+        <script type="application/json" id="users-data">
+            <%- JSON.stringify(users) %>
+        </script>
+        
+        <div class="form-group" style="margin-bottom: 10px;">
+            <!-- Your dropdown and other HTML content here -->
+        </div>
+
+        <div class="row" id="userList">
+            <!-- Users will be dynamically added here -->
+        </div>
+    <% } %>
+    
+    <script src="/js/filterUser.js"></script>
+</body>
+</html>
