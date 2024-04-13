@@ -21,21 +21,24 @@ function displayUsers(filteredUsers) {
         var userCard = document.createElement('div');
         userCard.className = 'col-lg-4 col-md-6 mb-3';
         userCard.innerHTML = `
-            <div class="card h-100 shadow-sm">
-                <div class="card-header bg-success text-white">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <img src="${element.imagePath}" class="rounded-circle" alt="${element.name}" style="width: 50px; height: 50px;">
-                        <div class="ms-2">
-                            <h5 class="mb-0">${element.firstName} ${element.lastName}</h5>
-                            <small>${element.email}</small>
-                        </div>
+        <div class="card h-100 shadow-sm">
+            <div class="card-header bg-success text-white">
+                <div class="d-flex justify-content-between align-items-center">
+                    <img src="${element.imagePath}" class="rounded-circle" alt="${element.name}" style="width: 50px; height: 50px;">
+                    <div class="ms-2">
+                        <h5 class="mb-0">${element.firstName} ${element.lastName}</h5>
+                        <small>${element.email}</small>
+                    </div>
+                    <div class="d-flex flex-column align-items-end">
                         <span class="badge bg-danger">${element.userType}</span>
+                        <span class="mt-2 badge">${element.price}€/Hour</span>
                     </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">${element.description}</p>
-                </div>
             </div>
+            <div class="card-body">
+                <p class="card-text">${element.description}</p>
+            </div>
+        </div>
         `;
         userList.appendChild(userCard);
     });

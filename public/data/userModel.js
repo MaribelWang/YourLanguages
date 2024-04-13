@@ -1,7 +1,7 @@
 
 // User class
 class User {
-  constructor(id, firstName, lastName, email, gender, userType, hashedPassword, imagePath, language, description) {
+  constructor(id, firstName, lastName, email, gender, userType, hashedPassword, imagePath, language, description, price) {
     this.id = id;
     this.firstName = firstName;
     this.lastName = lastName;
@@ -12,6 +12,7 @@ class User {
     this.imagePath = imagePath;
     this.language = language;
     this.description = description;
+    this.price = price;
   }
   
   // more for later

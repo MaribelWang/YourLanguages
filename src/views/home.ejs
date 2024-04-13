@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('partials/head.ejs') %>
-<body class="container mt-4">
+<body class="theme-green container mt-4">
     <%- include('partials/header.ejs') %>
 
     <% if(users.length){ %>
         <div class="mb-3 d-flex justify-content-start align-items-end">
             <!-- Existing language select -->
-            <div>
-                <label for="language" class="form-label" id="languageLabel">Select by Subjects:</label>
+            <div class="form-row">
+                <label for="language" class="form-label fw-bold" id="languageLabel">Select by Languages:</label>
                 <select name="language" class="form-select" id="language" aria-describedby="languageHelpBlock">
                     <option value="All Languages" selected>
                         All Languages</option>
@@ -31,14 +31,16 @@
             </div>
 
             <!-- New price range slider -->
-            <div style="margin-left: 20px;">
-                <label for="priceRange" class="form-label">Under what price:</label>
+            <div style="margin-left: 20px;" class="form-row slider-container">
+                <label for="priceRange" class="form-label fw-bold">Under What Price:</label>
+                <div class="slider-container">
                 <input type="range" id="priceRange" name="priceRange"
-                       min="0" max="500" value="250" oninput="updatePriceDisplay(this.value)">
-                <span id="priceDisplay">250</span>
+                       min="0" max="100" value="0" oninput="updatePriceDisplay(this.value)">
+                <span id="priceDisplay">0€/h</span>
+                </div>
             </div>
         </div>
-
+        
         <!-- Embed users data in the page -->
         <script type="application/json" id="users-data">
             <%- JSON.stringify(users) %>
@@ -57,10 +59,11 @@
     
     <script>
         function updatePriceDisplay(value) {
-            document.getElementById('priceDisplay').innerText = value;
+            document.getElementById('priceDisplay').innerText = value + '€/h';
         }
     </script>
     
     <script src="/js/filterUser.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -43,24 +43,36 @@ const authController = {
             title: 'login-form'
         })
     },
-    deleteUserById: (req, res ) => {
-        const data = readData(usersFilePath)
+    deleteUserById: (req, res) => {
+        try {
+            const data = readData(usersFilePath);
     
-        // Delete the teacher in the array
-        const userIndex = data.users.findIndex((user) => user.id == req.params.id)
+            // Find the user index
+            const userIndex = data.users.findIndex((user) => user.id == req.params.id);
+            if (userIndex === -1) {
+                throw new Error('User not found');
+            }
     
-        // Delete from the array
-        data.users.splice(userIndex, 1)
+            // Delete from the array
+            data.users.splice(userIndex, 1);
     
-        // Update the json file
-        writeData(data, usersFilePath)
-
-        delete req.session.user
-        res.redirect('/login-form')
+            // Update the json file
+            writeData(data, usersFilePath);
+    
+            // Destroy the session and redirect
+            req.session.destroy(() => {
+                res.redirect('/login-form');
+            });
+        } catch (error) {
+            console.error(error);
+            // Handle the error, maybe redirect to an error page
+            res.status(500).send('Server error');
+        }
     },
+    
     login: (req, res) => {
-        const data = readData(usersFilePath)
-        let errors = validationResult(req)
+        const data = readData(usersFilePath);
+        let errors = validationResult(req);
     
         // If there are no erros login normally
         if(errors.isEmpty()){
@@ -69,14 +81,14 @@ const authController = {
     
                 data.users.forEach( user => {
                     // Look for the user email and compare with the one inserted in the login form
-                    if(req.body.email == user.email){
-                        console.log(user.email)
+                    if(req.body.email === user.email){
+                        console.log(user.email);
                         // Check hash
                         let check = bcrypt.compareSync(req.body.password, user.hashedPassword); //true false
     
                         // User and password are correct
                         if(check){
-                            req.session.user = user
+                            req.session.user = user;
     
                             // Create cookie if checkbox is checked
                             console.log('remember -> value: '+req.body.remember)
@@ -86,14 +98,14 @@ const authController = {
                                 })
                             }
     
-                            res.redirect('/')
+                            res.redirect('/');
                         }else{
-                            res.send('User or password is incorrect')
+                            res.send('User or password is incorrect');
                         }
                     }
                 })
             }else{
-                res.send("User doesn't exist")
+                res.send("User doesn't exist");
             }
         // If we have errors in the login render de form with the errors
         } else {
@@ -109,21 +121,22 @@ const authController = {
     },
     goToSignUpForm: (req, res) => {
         res.render('register-form',
-        {
-            title: 'register-form'
-        })
+            {
+                title: 'register-form'
+            });
     },
     signUp: (req, res) => {
-        const data = readData(usersFilePath)
-        let errors = validationResult(req)
+        const data = readData(usersFilePath);
+        let errors = validationResult(req);
     
         // If there are no erros sing up normally
-        console.log(errors)
+        console.log(errors);
         if (errors.isEmpty()) {
 
         let language = req.body.language; // 接收表单提交的语言
         let description = req.body.description; // 接收表单提交的描述
         let userType = req.body.userType; // 接收表单提交的账户类型
+        let price = req.body.price;  //Receive the price from register form
             // hash password
             let hash = bcrypt.hashSync(req.body.password, 10);
 
@@ -145,29 +158,30 @@ const authController = {
                 hash,
                 imagePath,
                 language,
-                description
+                description,
+                price
             )
     
             if(data != null){
                 
                 // Add the new professor to the data.json file
-                data.users.push(newUser)
+                data.users.push(newUser);
     
-                writeData(data, usersFilePath)
+                writeData(data, usersFilePath);
     
                 // Create a session variable
-                req.session.user = newUser
-                res.redirect('/')
+                req.session.user = newUser;
+                res.redirect('/');
             }
         // If the validation has errors return to the login with the errors
         } else {
             res.render('register-form',
-                { 
+                {
                     title: 'register-form',
                     errors: errors.mapped(),
                     old: req.body
                 }
-            )
+            );
         }
     }
 }

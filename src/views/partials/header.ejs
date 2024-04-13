@@ -4,13 +4,13 @@
             <img src="/assets/logo.png" alt="logo" style="width: 100px; height: auto;"/>
         </a>
         <div class="d-flex align-items-center">
-            <% if (user.email == "") { %>
+            <% if (user.email === "") { %>
                 <a href="/login-form" class="btn btn-outline-success me-2">Log in</a>
                 <a href="/register-form" class="btn btn-success">Register</a>
             <% } else { %>
                 <div class="dropdown">
                     <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img  alt="User Image" class="rounded-circle me-2" style="width: 50px; height: 50px;" src=<%= user.imagePath %>>
+                        <img  alt="User Image" class="rounded-circle me-2" style="width: 50px; height: 50px;" src="<%= user.imagePath%>">
                         <small class="text-dark"><%= user.email %></small>
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">

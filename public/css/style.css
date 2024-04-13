@@ -4,6 +4,11 @@ body {
   margin-top: 20px;
 }
 
+.navbar-light.bg-light {
+  background-color: transparent !important;
+}
+
+
 .user-card {
   background-color: white;
   border-radius: 4px;
@@ -135,32 +140,91 @@ h2 {
 }
 
 /* slider */
-.slider {
-  width: 100%;
-  height: 25px;
-  background: #ddd;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
+
+/* Ensures alignment of the label and select dropdown */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.slider:hover {
-  opacity: 1;
+/* Styles for label and select elements */
+.form-label {
+  white-space: nowrap; /* Prevents label text from wrapping */
+  margin-bottom: 0; /* Aligns the text baseline of the label with the select */
 }
 
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
-  cursor: pointer;
+.form-select {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--green-main);
+  background-color: var(--green-light);
 }
 
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  background: #4CAF50;
-  cursor: pointer;
+/* This will keep the range and its label in one line */
+.slider-container {
+  display: flex;
+  align-items: center;
+  margin-left: 20px; /* Keeps consistent spacing from the previous element */
+}
+
+/* Additional styling for the range input */
+input[type="range"] {
+  flex-grow: 2; /* Allows the slider to take up more space */
+  margin-right: 10px; /* Spacing between the slider and the number display */
+}
+
+/* Aligns the number display to the right of the slider */
+#priceDisplay {
+  min-width: 30px;
+  text-align: center;
+  font-size: 18px; /* Adjust the size as needed */
+  color:#329032; /* Green color for the text */
+  font-weight: bold; /* Makes the number bold */
+}
+
+
+/* 下拉菜单的通用样式 */
+.dropdown-menu {
+  min-width: 200px; /* 设置下拉菜单的最小宽度 */
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); /* 添加阴影以获得立体感 */
+  border-radius: 0.25rem; /* 圆角边框 */
+  border: none; /* 移除边框 */
+}
+
+/* 下拉项样式 */
+.dropdown-item {
+  color: #333; /* 字体颜色 */
+  padding: 0.75rem 1rem; /* 内边距 */
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: #fff; /* 悬停时字体颜色 */
+  background-color: #5cb85c; /* 悬停时背景颜色 */
+  border-radius: 0.25rem; /* 圆角边框 */
+}
+
+/* 特别强调的操作，如登出和删除账号 */
+.dropdown-item.text-danger {
+  color: #d9534f; /* 强调项字体颜色 */
+}
+
+.dropdown-item.text-danger:hover,
+.dropdown-item.text-danger:focus {
+  background-color: #d9534f; /* 强调项悬停时背景颜色 */
+  color: #fff;
+}
+
+/* 下拉菜单分隔线样式 */
+.dropdown-divider {
+  border-top: 1px solid #e9ecef; /* 分隔线颜色 */
+}
+
+/* 修改后的登出和删除账号按钮样式 */
+#logout-button,
+.delete-account-button {
+  width: 100%; /* 宽度调整为100% */
+  text-align: left; /* 文字居左 */
 }
