@@ -1,16 +1,13 @@
 var languageSelection = document.getElementById('language');
+var priceRange = document.getElementById('priceRange');
 var users = JSON.parse(document.getElementById('users-data').textContent);
 
-function filterUsers(language) {
-    if (language === "All Languages") {
-        return users;
-    }
-
-    var filteredUsers = users.filter(function(element) {
-        return element.language === language;
+function filterUsers(language, price) {
+    return users.filter(function (element) {
+        var priceCondition = Number.parseInt(element.price) <=  Number.parseInt(price);
+        var languageCondition = element.language === language || language === "All Languages";
+        return priceCondition && languageCondition;
     });
-
-    return filteredUsers;
 }
 
 function displayUsers(filteredUsers) {
@@ -46,13 +43,32 @@ function displayUsers(filteredUsers) {
 
 languageSelection.addEventListener('change', function() {
     var selectedLanguage = languageSelection.value;
+    var selectedPrice = priceRange.value;
     console.log('Selected Language:', selectedLanguage);
 
-    var filteredUsers = filterUsers(selectedLanguage);
+    var filteredUsers = filterUsers(selectedLanguage, selectedPrice);
 
     displayUsers(filteredUsers);
 });
 
+priceRange.addEventListener('input', function() {
+    var selectedLanguage = languageSelection.value;
+    var selectedPrice = priceRange.value;
+    updatePriceDisplay(selectedPrice);
+    console.log('Selected Price:', selectedPrice);
+    var filteredUsers = filterUsers(selectedLanguage, selectedPrice);
+    
+    displayUsers(filteredUsers);
+});
+
+function updatePriceDisplay(value) {
+    document.getElementById('priceDisplay').innerText = value + '€/h';
+}
+
 var initialLanguage = languageSelection.value;
-var initialFilteredUsers = filterUsers(initialLanguage);
+var initialPrice = priceRange.value;
+
+var initialFilteredUsers = filterUsers(initialLanguage,initialPrice);
 displayUsers(initialFilteredUsers);
+
+updatePriceDisplay(initialPrice);

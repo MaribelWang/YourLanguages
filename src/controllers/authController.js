@@ -47,6 +47,7 @@ const authController = {
         try {
             const data = readData(usersFilePath);
     
+            console.log(req.params.id)
             // Find the user index
             const userIndex = data.users.findIndex((user) => user.id == req.params.id);
             if (userIndex === -1) {
@@ -161,7 +162,7 @@ const authController = {
                 description,
                 price
             )
-    
+            console.log("this is the image path",newUser.imagePath);
             if(data != null){
                 
                 // Add the new professor to the data.json file

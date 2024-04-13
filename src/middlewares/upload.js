@@ -3,7 +3,7 @@ const multer  = require('multer')
 // Storage file on disk
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'public/uploads')
+      cb(null, 'public/assets')
     },
     filename: function (req, file, cb) {
       const uniqueFileName = `${new Date().getTime()}_${file.originalname}`;
