@@ -15,7 +15,25 @@ class User {
     this.price = price;
   }
   
-  // more for later
+  getId() {
+    return this.id
+  }
+
+  setId(id) {
+    this.id = id
+  }
+
+  getFirstName() {
+    return this.firstName
+  }
+
+  setFirstName(firstName) {
+    this.firstName = firstName
+  }
+
+  //TODO: Implement the rest of the getters and setters
+
+
 }
 
 module.exports = User;

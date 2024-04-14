@@ -14,7 +14,8 @@
                     </a>
                     <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser">
                         <li>
-                            <a class="dropdown-item" href="/edit-profile/<%= user.id %>" data-profile="true">Edit Profile</a>
+                            <a href="/edit" class="dropdown-item" data-profile="true">Edit Profile</a>
+
                         </li>
                         <li>
                             <a class="dropdown-item text-danger" href="/log-out" id="logout-button">Log out</a>
@@ -23,7 +24,7 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li>
-                            <form action="/delete-account/<%= user.id %>?_method=DELETE" method="POST">
+                            <form action="/delete-account" method="POST">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button class="dropdown-item text-danger delete-account-button" type="submit">Delete account</button>
                             </form>

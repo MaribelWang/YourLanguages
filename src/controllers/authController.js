@@ -1,12 +1,12 @@
 const bcrypt = require('bcryptjs');
-const path = require('path')
+const path = require('path');
 
-const usersFilePath = path.join(__dirname, '../../public/data/users.json')
-const { validationResult } = require('express-validator')
-const {readData, writeData, generateUniqueId} = require('./dataController')
+const usersFilePath = path.join(__dirname, '../../public/data/users.json');
+const { validationResult } = require('express-validator');
+const { readData, writeData, generateUniqueId } = require('./dataController');
 
 //Require the model for the server
-const User = require('../../public/data/userModel')
+const User = require('../../public/data/userModel');
 //Require the model for the database
 
 const authController = {
@@ -25,8 +25,8 @@ const authController = {
         res.render('home', {
             title: "Home",
             users: users,
-            user:  req.session.user ? req.session.user : {email: ""}
-        })
+            user: req.session.user ? req.session.user : { email: "" }
+        });
     
     },
     goToLogin: (req, res ) => {
@@ -37,7 +37,7 @@ const authController = {
     },
     logOut: (req, res ) => {
         // Delete the session
-        delete req.session.user
+        delete req.session.userId;
         res.render('login-form',
         {
             title: 'login-form'
@@ -47,11 +47,11 @@ const authController = {
         try {
             const data = readData(usersFilePath);
     
-            console.log(req.params.id)
             // Find the user index
-            const userIndex = data.users.findIndex((user) => user.id == req.params.id);
+            const userIndex = data.users.findIndex((user) => user.id === req.params.id);
             if (userIndex === -1) {
-                throw new Error('User not found');
+                console.error(req.session.user.id);
+                console.error('User not found');
             }
     
             // Delete from the array
@@ -75,51 +75,50 @@ const authController = {
         const data = readData(usersFilePath);
         let errors = validationResult(req);
     
-        // If there are no erros login normally
-        if(errors.isEmpty()){
-            // If the db is not empty
-            if(data.users.length > 0){
+        // 如果没有错误则正常登录
+        if (errors.isEmpty()) {
+            // 如果数据库不为空
+            if (data.users.length > 0) {
+                data.users.forEach(user => {
+                    // 查找用户邮箱并比较
+                    if (req.body.email === user.email) {
+                        // 检查哈希密码
+                        let check = bcrypt.compareSync(req.body.password, user.hashedPassword);
     
-                data.users.forEach( user => {
-                    // Look for the user email and compare with the one inserted in the login form
-                    if(req.body.email === user.email){
-                        console.log(user.email);
-                        // Check hash
-                        let check = bcrypt.compareSync(req.body.password, user.hashedPassword); //true false
-    
-                        // User and password are correct
-                        if(check){
-                            req.session.user = user;
-    
-                            // Create cookie if checkbox is checked
-                            console.log('remember -> value: '+req.body.remember)
-                            if(req.body.remember){
+                        // 如果用户和密码正确
+                        if (check) {
+                            req.session.userId = user.id; // 只保存用户ID到会话中
+                            console.log('Session User ID:', req.session.userId);
+
+                            
+
+                            
+                            // 如果记住我被选中，创建一个cookie
+                            if (req.body.remember) {
                                 res.cookie('MyCookie', user.email, {
-                                    maxAge: 1000 * 60 * 60,
-                                })
+                                    maxAge: 1000 * 60 * 60, // 1小时
+                                });
                             }
     
                             res.redirect('/');
-                        }else{
+                        } else {
                             res.send('User or password is incorrect');
                         }
                     }
-                })
-            }else{
+                });
+            } else {
                 res.send("User doesn't exist");
             }
-        // If we have errors in the login render de form with the errors
+        // 如果有错误在登录表单显示错误
         } else {
-            console.log(errors)
-            res.render('login-form',
-                {
-                    title: 'login-form',
-                    errors: errors.mapped(),
-                    old: req.body
-                }
-            )
-        }   
+            res.render('login-form', {
+                title: 'login-form',
+                errors: errors.mapped(),
+                old: req.body
+            });
+        }
     },
+    
     goToSignUpForm: (req, res) => {
         res.render('register-form',
             {
@@ -162,8 +161,8 @@ const authController = {
                 description,
                 price
             )
-            console.log("this is the image path",newUser.imagePath);
-            if(data != null){
+
+            if (data != null) {
                 
                 // Add the new professor to the data.json file
                 data.users.push(newUser);
@@ -184,7 +183,8 @@ const authController = {
                 }
             );
         }
-    }
+    },
+    
 }
 
 module.exports = authController;

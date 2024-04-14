@@ -27,12 +27,15 @@ const User = sequelize.define('Users', {
     languageRequired: {
         type: DataTypes.STRING
     },
+    pricePreferred: {
+        type:DataTypes.INTEGER
+    },
     description: {
         type: DataTypes.STRING
     }
 },{
-    //Here you can add aditional config like
+    //Here can add aditional config like
     //timestamps: false
 })
 
-module.exports = User
+module.exports = User;

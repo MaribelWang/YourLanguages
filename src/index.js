@@ -39,10 +39,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/assets', express.static('assets'));
 
+
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
+
 
 app.use(session({
     secret: 'my_secret',
@@ -55,6 +57,10 @@ app.use(session({
 
 // Set the router
 app.use('/', require(path.join(__dirname, 'routes/router')));
+const userRoutes = require('./routes/userRoutes');
+// ...
+app.use('/', userRoutes);
+
 
 //--------------------------------------------------------
 // Set a default port in case we didn't configure anything
